@@ -1,0 +1,20 @@
+---
+- name: Setup loopback ip
+  host: 10.215.26.164
+
+  tasks:
+    - name : Set ip
+      ios_l3_interface:
+        name: loopback{{item.name}}
+        ipv4: 10.0.{{item.ipv4}}.1/24
+      with_items:
+        - {name: 1, ipv4: 1 }
+        - {name: 2, ipv4: 2}
+
+    - name : Show ip int br
+      ios_command:
+        commands:
+          - show ip int brief
+      register: show_ip
+
+    - debug: var=show_ip.stdout_lines
