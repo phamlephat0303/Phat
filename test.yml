@@ -1,6 +1,6 @@
 ---
 - name: Setup loopback ip
-  host: 10.215.26.164
+  hosts: all
 
   tasks:
     - name : Set ip
